@@ -1,10 +1,22 @@
 import express from 'express';
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import Home from './src/home';
 
 const app = express();
+const content = renderToString(<Home />);
 
 app.get('/', function(req, res) {
-  console.log(req);
-  res.send('Hello');
+  res.send(`
+  <html>
+    <head>
+      <title>ssr</title>
+    </head>
+    <body>
+      <div id="root">${content}</div>
+    </body>
+  </html>
+  `);
 });
 
 app.listen(3001, () => {
