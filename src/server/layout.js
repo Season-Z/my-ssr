@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import Routers from '@/client/Routers';
 
-export const renderLayout = req => {
+export default req => {
   const content = renderToString(
     <StaticRouter location={req.url} context={{}}>
       <Routers />

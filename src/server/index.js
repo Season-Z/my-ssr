@@ -1,5 +1,5 @@
 import express from 'express';
-import { renderLayout } from './utils';
+import renderLayout from './layout';
 
 const app = express();
 app.use(express.static('public')); // 服务器渲染使用静态文件
