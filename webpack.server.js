@@ -1,7 +1,9 @@
 const path = require('path');
+const merge = require('webpack-merge');
 const nodeExternals = require('webpack-node-externals');
+const baseConfig = require('./webpack.base');
 
-module.exports = {
+const serverConfig = {
   target: 'node',
   mode: 'development',
   entry: './src/server/index.js',
@@ -9,29 +11,7 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'bundle')
   },
-  externals: [nodeExternals()], // 解决【the request of a dependency is an expression】报错
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        options: {
-          presets: [
-            'react',
-            'stage-0',
-            'es2015',
-            [
-              'env',
-              {
-                targets: {
-                  browsers: ['last 2 versions']
-                }
-              }
-            ]
-          ]
-        }
-      }
-    ]
-  }
+  externals: [nodeExternals()] // 解决【the request of a dependency is an expression】报错
 };
+
+module.exports = merge(baseConfig, serverConfig);
