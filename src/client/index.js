@@ -1,5 +1,15 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Home from '../containers/Home';
+import { BrowserRouter } from 'react-router-dom';
 
-ReactDom.hydrate(<Home />, document.getElementById('root'));
+import Routers from './Routers';
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routers />
+    </BrowserRouter>
+  );
+};
+
+ReactDom.hydrate(<App />, document.getElementById('root'));

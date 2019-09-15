@@ -1,4 +1,11 @@
+const path = require('path');
+
 module.exports = {
+  resolve: {
+    alias: {
+      '@': path.resolve('src') // 这样配置后 @ 可以指向 src 目录
+    }
+  },
   module: {
     rules: [
       {
