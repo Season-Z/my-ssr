@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
-import Routers from '@/client/Routers';
+import Routers from '@/Routers';
 
 export default req => {
   const content = renderToString(
