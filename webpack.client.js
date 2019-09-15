@@ -1,15 +1,15 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
+// const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
-  target: 'node',
+  // target: 'node',
   mode: 'development',
-  entry: './src/server/index.js',
+  entry: './src/client/index.js',
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'bundle')
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'public')
   },
-  externals: [nodeExternals()], // 解决【the request of a dependency is an expression】报错
+  // externals: [nodeExternals()], // 解决【the request of a dependency is an expression】报错
   module: {
     rules: [
       {
