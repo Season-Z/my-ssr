@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import { getValue } from './store/action';
 
 class Home extends Component {
+  // static loadData = () => {
+  //   this.props.getValue();
+  // };
+
   componentDidMount() {
     this.props.getValue();
   }
@@ -15,12 +19,16 @@ class Home extends Component {
         <br />
         <Link to="/login">login</Link>
         <div>{this.props.name}</div>
-        {this.props.newList}
+        {this.props.newList && <div>{this.props.newList}</div>}
         {/* <button onClick={(this.changeName)}>click</button> */}
       </div>
     );
   }
 }
+
+Home.loadData = store => {
+  return store.dispatch(getValue());
+};
 
 const mapStateToProps = state => ({
   name: state.home.name,

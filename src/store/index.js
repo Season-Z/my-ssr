@@ -10,4 +10,9 @@ const getStore = () => {
   return createStore(rootReducer, applyMiddleware(thunk));
 };
 
-export default getStore;
+const getClientStore = () => {
+  const defaultState = window.state_context.state;
+  return createStore(rootReducer, defaultState, applyMiddleware(thunk));
+};
+
+export { getStore, getClientStore };
