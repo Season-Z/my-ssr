@@ -1,11 +1,13 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
+import { reducer as HomeReducer } from '@/page/Home/store';
 
 const rootReducer = combineReducers({
-  counter
+  home: HomeReducer
 });
-const reducer = (state = { name: 'dell' }, action) => {
-  return state;
+
+const getStore = () => {
+  return createStore(rootReducer, applyMiddleware(thunk));
 };
 
-export default createStore(rootReducer, applyMiddleware(thunk));
+export default getStore;
