@@ -9,7 +9,9 @@ class Home extends Component {
   // };
 
   componentDidMount() {
-    this.props.getValue();
+    if (!this.props.newList) {
+      this.props.getValue();
+    }
   }
 
   render() {
