@@ -11,7 +11,23 @@ const serverConfig = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'bundle')
   },
-  externals: [nodeExternals()] // 解决【the request of a dependency is an expression】报错
+  externals: [nodeExternals()], // 解决【the request of a dependency is an expression】报错
+  module: {
+    rules: [
+      {
+        test: /\.css?$/,
+        use: [
+          'isomorphic-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          }
+        ]
+      }
+    ]
+  }
 };
 
 module.exports = merge(baseConfig, serverConfig);

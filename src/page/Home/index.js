@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getValue } from './store/action';
+import styles from './style.css';
 
 class Home extends Component {
   // static loadData = () => {
   //   this.props.getValue();
   // };
+
+  componentWillMount() {
+    if (this.props.staticContext) {
+      this.props.staticContext.css.push(styles._getCss());
+    }
+  }
 
   componentDidMount() {
     if (!this.props.newList) {
@@ -16,7 +23,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.red}>
         <Link to="/">home</Link>
         <br />
         <Link to="/login">login</Link>

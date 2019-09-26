@@ -11,6 +11,9 @@ app.get('*', (req, res) => {
   const store = getStore();
   const branch = matchRoutes(routers, req.path);
   const promises = [];
+  const context = {
+    css: []
+  };
 
   branch.forEach(item => {
     if (item.route.loadData) {
@@ -19,7 +22,7 @@ app.get('*', (req, res) => {
   });
 
   Promise.all(promises).then(() => {
-    res.send(renderLayout(req, store, routers));
+    res.send(renderLayout(req, store, routers, context));
   });
 });
 

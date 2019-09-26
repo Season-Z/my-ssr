@@ -4,19 +4,22 @@ import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { Provider } from 'react-redux';
 
-export default (req, store, routers) => {
+export default (req, store, routers, context) => {
   const content = renderToString(
     <Provider store={store}>
-      <StaticRouter location={req.url} context={{}}>
+      <StaticRouter location={req.url} context={context}>
         {renderRoutes(routers)}
       </StaticRouter>
     </Provider>
   );
 
+  const cssStr = context.css.length ? context.css.join('\n') : '';
+
   return `
      <html>
        <head>
          <title>ssr</title>
+         <style>${cssStr}</style>
        </head>
        <body>
           <div id="root">${content}</div>
