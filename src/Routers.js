@@ -1,5 +1,6 @@
 import Home from '@/page/Home';
 import Login from '@/page/Login';
+import NotFound from '@/page/NotFound';
 
 const router = [
   {
@@ -13,6 +14,10 @@ const router = [
     path: '/login',
     component: Login,
     key: 'login'
+  },
+  {
+    path: '*',
+    component: NotFound
   }
 ];
 

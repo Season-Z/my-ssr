@@ -22,7 +22,13 @@ app.get('*', (req, res) => {
   });
 
   Promise.all(promises).then(() => {
-    res.send(renderLayout(req, store, routers, context));
+    const content = renderLayout(req, store, routers, context);
+
+    // 如果当前页面不存在，则设置http请求的状态码
+    if (context.notFound) {
+      res.status(404);
+    }
+    res.send(content);
   });
 });
 
