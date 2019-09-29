@@ -5,9 +5,9 @@ import { getValue } from './store/action';
 import styles from './style.css';
 
 class Home extends Component {
-  // static loadData = () => {
-  //   this.props.getValue();
-  // };
+  static loadData = store => {
+    return store.dispatch(getValue());
+  };
 
   componentWillMount() {
     if (this.props.staticContext) {
@@ -34,10 +34,6 @@ class Home extends Component {
     );
   }
 }
-
-Home.loadData = store => {
-  return store.dispatch(getValue());
-};
 
 const mapStateToProps = state => ({
   name: state.home.name,
