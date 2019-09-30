@@ -32,6 +32,4 @@ app.get('*', (req, res) => {
   });
 });
 
-app.listen(3001, () => {
-  console.log('listen:3001');
-});
+app.listen(3001);

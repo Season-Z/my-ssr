@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -6,6 +7,7 @@ module.exports = {
       '@': path.resolve('src') // 这样配置后 @ 可以指向 src 目录
     }
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -30,5 +32,6 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 };
