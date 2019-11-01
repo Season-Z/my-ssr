@@ -1,0 +1,1 @@
+scp -r * root@39.98.140.218:/root/zhouxishun/my-ssr

@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm-run-all --parallel dev:**",
+    "dev": "npm-run-all --parallel dev:** --watch",
     "dev:start": "nodemon --watch bundle --exec node \"./bundle/bundle.js\"",
     "dev:build:client": "webpack --config webpack.client.js --watch",
-    "dev:build:server": "webpack --config webpack.server.js --watch"
+    "dev:build:server": "webpack --config webpack.server.js --watch",
+    "start": "node \"./bundle/bundle.js\"",
+    "build": "npm-run-all --parallel build:*",
+    "build:client": "webpack --config webpack.client.js",
+    "build:server": "webpack --config webpack.server.js"
   },
   "keywords": [],
   "author": "",
