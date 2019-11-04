@@ -1,37 +1,30 @@
 const path = require('path');
-// const nodeExternals = require('webpack-node-externals');
+const merge = require('webpack-merge');
+const baseConfig = require('./webpack.base');
 
-module.exports = {
-  // target: 'node',
+const clientConfig = {
   mode: 'development',
   entry: './src/client/index.js',
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'public')
   },
-  // externals: [nodeExternals()], // 解决【the request of a dependency is an expression】报错
   module: {
     rules: [
       {
-        test: /\.(js|jsx)?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        options: {
-          presets: [
-            'react',
-            'stage-0',
-            'es2015',
-            [
-              'env',
-              {
-                targets: {
-                  browsers: ['last 2 versions']
-                }
-              }
-            ]
-          ]
-        }
+        test: /\.css?$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          }
+        ]
       }
     ]
   }
 };
+
+module.exports = merge(baseConfig, clientConfig);
