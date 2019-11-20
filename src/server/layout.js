@@ -24,9 +24,7 @@ export default (req, store, routers, context) => {
        <body>
           <div id="root">${content}</div>
           <script>
-            window.state_context = {
-              state: ${JSON.stringify(store.getState())}
-            }
+            window.state_context = {state:${JSON.stringify(store.getState())}}
           </script>
           <script src="./index.js"></script>
        </body>

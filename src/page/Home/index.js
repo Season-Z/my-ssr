@@ -1,50 +1,82 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+// import React, { Component } from 'react';
+// import { connect } from 'react-redux';
+// import { Link } from 'react-router-dom';
+// import { getValue } from './store/action';
+// import styles from './style.css';
+
+// class Home extends Component {
+//   static loadData = store => {
+//     return store.dispatch(getValue());
+//   };
+
+//   componentWillMount() {
+//     if (this.props.staticContext) {
+//       this.props.staticContext.css.push(styles._getCss());
+//     }
+//   }
+
+//   componentDidMount() {
+//     if (!this.props.newList) {
+//       this.props.getValue();
+//     }
+//   }
+
+//   render() {
+//     return (
+//       <div className={styles.red}>
+//         <Link to="/">home</Link>
+//         <br />
+//         <Link to="/login">login</Link>
+//         <div>{this.props.name}</div>
+//         {this.props.newList && <div>{this.props.newList}</div>}
+//         {/* <button onClick={(this.changeName)}>click</button> */}
+//       </div>
+//     );
+//   }
+// }
+
+// const mapStateToProps = state => ({
+//   name: state.home.name,
+//   newList: state.home.newList
+// });
+
+// const mapDispatchToProps = dispatch => ({
+//   getValue: () => dispatch(getValue())
+// });
+
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(Home);
+
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getValue } from './store/action';
 import styles from './style.css';
 
-class Home extends Component {
-  static loadData = store => {
-    return store.dispatch(getValue());
-  };
+function Home() {
+  const dispatch = useDispatch();
+  const data = useSelector(state => state.home);
 
-  componentWillMount() {
-    if (this.props.staticContext) {
-      this.props.staticContext.css.push(styles._getCss());
-    }
-  }
+  useEffect(() => {
+    dispatch(getValue());
+  }, []);
 
-  componentDidMount() {
-    if (!this.props.newList) {
-      this.props.getValue();
-    }
-  }
-
-  render() {
-    return (
-      <div className={styles.red}>
-        <Link to="/">home</Link>
-        <br />
-        <Link to="/login">login</Link>
-        <div>{this.props.name}</div>
-        {this.props.newList && <div>{this.props.newList}</div>}
-        {/* <button onClick={(this.changeName)}>click</button> */}
-      </div>
-    );
-  }
+  return (
+    <div className={styles.red}>
+      <Link to="/">home</Link>
+      <br />
+      <Link to="/login">login</Link>
+      <div>{data.name}</div>
+      {data.newList && <div>{data.newList}</div>}
+      {/* <button onClick={(this.changeName)}>click</button> */}
+    </div>
+  );
 }
 
-const mapStateToProps = state => ({
-  name: state.home.name,
-  newList: state.home.newList
-});
+Home.loadData = store => {
+  return store.dispatch(getValue());
+};
 
-const mapDispatchToProps = dispatch => ({
-  getValue: () => dispatch(getValue())
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+export default Home;
