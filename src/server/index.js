@@ -4,6 +4,7 @@ import proxy from 'express-http-proxy';
 import routers from '@/routers';
 import { getStore } from '@/store';
 import renderLayout from './layout';
+import { SERVER_BASEURL } from '@/utils/config';
 
 const app = express();
 app.use(express.static('public')); // 服务器渲染使用静态文件
@@ -11,7 +12,7 @@ app.use(express.static('public')); // 服务器渲染使用静态文件
 //相当于拦截到了前端请求地址中的/api部分，然后换成另一个地址
 app.use(
   '/api',
-  proxy('http://119.29.232.127:8077', {
+  proxy(SERVER_BASEURL, {
     proxyReqPathResolver: function(req) {
       return `/api${req.url}`;
     }
@@ -25,10 +26,18 @@ app.get('*', (req, res) => {
   const context = {
     css: []
   };
-
   branch.forEach(item => {
+    console.log(item.route);
+
     if (item.route.loadData) {
-      promises.push(item.route.loadData(store));
+      // 包裹一层 promise 实例，阻止服务端请求错误导致 Promise.all 方法错误
+      const promise = new Promise(resolve => {
+        item.route
+          .loadData(store)
+          .then(resolve)
+          .catch(resolve);
+      });
+      promises.push(promise);
     }
   });
 

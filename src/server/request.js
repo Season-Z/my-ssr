@@ -1,8 +1,8 @@
-//新建server/request.js
 import axios from 'axios';
+import { SERVER_BASEURL } from '@/utils/config';
 
 const instance = axios.create({
-  baseURL: 'http://119.29.232.127:8077'
+  baseURL: SERVER_BASEURL
 });
 
 export default instance;

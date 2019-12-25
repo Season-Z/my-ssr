@@ -10,6 +10,7 @@
 //   };
 
 //   componentWillMount() {
+//     console.log(this.props.staticContext);
 //     if (this.props.staticContext) {
 //       this.props.staticContext.css.push(styles._getCss());
 //     }
@@ -55,13 +56,19 @@ import { Link } from 'react-router-dom';
 import { getValue } from './store/action';
 import styles from './style.css';
 
-function Home() {
+function Home(props) {
   const dispatch = useDispatch();
   const data = useSelector(state => state.home);
 
   useEffect(() => {
     dispatch(getValue());
   }, []);
+
+  // useEffect(() => {
+  //   if (props.staticContext) {
+  //     props.staticContext.css.push(styles._getCss());
+  //   }
+  // }, []);
 
   return (
     <div className={styles.red}>
