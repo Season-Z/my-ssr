@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const MiniCssPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   resolve: {
@@ -14,7 +15,9 @@ module.exports = {
         test: /\.(js|jsx)?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+        include: [path.resolve(__dirname, 'src')],
         options: {
+          cacheDirectory: '.tmp/babel-loader',
           presets: [
             'react',
             'stage-0',
@@ -33,5 +36,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssPlugin({
+      filename: 'styles/[name].css',
+      chunkFilename: 'styles/[name].css'
+    })
+  ]
 };

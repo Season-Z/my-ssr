@@ -1,13 +1,14 @@
 const path = require('path');
 const merge = require('webpack-merge');
-const baseConfig = require('./webpack.base');
+const baseConfig = require('../webpackBase');
+const MiniCssPlugin = require('mini-css-extract-plugin');
 
 const clientConfig = {
   mode: 'development',
   entry: './src/client/index.js',
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, 'public')
+    path: path.resolve(__dirname, 'dist/client')
   },
   module: {
     rules: [
@@ -15,6 +16,7 @@ const clientConfig = {
         test: /\.css?$/,
         use: [
           'style-loader',
+          MiniCssPlugin.loader,
           {
             loader: 'css-loader',
             options: {
