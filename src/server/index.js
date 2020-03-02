@@ -27,8 +27,6 @@ app.get('*', (req, res) => {
     css: []
   };
   branch.forEach(item => {
-    console.log(item.route);
-
     if (item.route.loadData) {
       // 包裹一层 promise 实例，阻止服务端请求错误导致 Promise.all 方法错误
       const promise = new Promise(resolve => {
