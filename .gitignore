@@ -6,3 +6,7 @@ dist
 .tmp
 publish.sh
 *.zip
+package-lock.json
+publish.sh
+build
+public

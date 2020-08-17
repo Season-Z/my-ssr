@@ -1,7 +1,7 @@
-import Layout from '@/page/Layout';
-import Home from '@/page/Home';
-import Login from '@/page/Login';
-import NotFound from '@/page/NotFound';
+import Layout from '@page/Layout'
+import Home from '@page/Home'
+import Login from '@page/Login'
+import NotFound from '@page/NotFound'
 
 const router = [
   {
@@ -12,19 +12,19 @@ const router = [
         component: Home,
         exact: true,
         key: 'home',
-        loadData: Home.loadData
+        loadData: Home.loadData,
       },
       {
         path: '/login',
         component: Login,
-        key: 'login'
+        key: 'login',
       },
       {
         path: '*',
-        component: NotFound
-      }
-    ]
-  }
-];
+        component: NotFound,
+      },
+    ],
+  },
+]
 
-export default router;
+export default router

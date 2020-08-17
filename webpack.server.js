@@ -1,8 +1,11 @@
-const path = require('path');
-const merge = require('webpack-merge');
-const nodeExternals = require('webpack-node-externals');
-const MiniCssPlugin = require('mini-css-extract-plugin');
-const baseConfig = require('./webpack.base');
+/* eslint-disable global-require */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/no-extraneous-dependencies */
+const path = require('path')
+const merge = require('webpack-merge')
+const nodeExternals = require('webpack-node-externals')
+const MiniCssPlugin = require('mini-css-extract-plugin')
+const baseConfig = require('./webpack.base')
 
 const serverConfig = {
   target: 'node',
@@ -10,7 +13,7 @@ const serverConfig = {
   entry: './src/server/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, 'build'),
   },
   externals: [nodeExternals()], // 解决【the request of a dependency is an expression】报错
   module: {
@@ -23,13 +26,20 @@ const serverConfig = {
           {
             loader: 'css-loader',
             options: {
-              modules: true
-            }
-          }
-        ]
-      }
-    ]
-  }
-};
+              modules: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: () => [require('postcss-preset-env')()],
+            },
+          },
+        ],
+      },
+    ],
+  },
+}
 
-module.exports = merge(baseConfig, serverConfig);
+module.exports = merge(baseConfig, serverConfig)

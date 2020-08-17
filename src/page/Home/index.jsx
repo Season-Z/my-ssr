@@ -50,19 +50,20 @@
 //   mapDispatchToProps
 // )(Home);
 
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { getValue } from './store/action';
-import styles from './style.css';
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { getValue } from './store/action'
+// import styles from './style.css'
+import './style.css'
 
-function Home(props) {
-  const dispatch = useDispatch();
-  const data = useSelector(state => state.home);
+function Home() {
+  const dispatch = useDispatch()
+  const data = useSelector((state) => state.home)
 
   useEffect(() => {
-    dispatch(getValue());
-  }, []);
+    dispatch(getValue())
+  }, [dispatch])
 
   // useEffect(() => {
   //   if (props.staticContext) {
@@ -71,7 +72,7 @@ function Home(props) {
   // }, []);
 
   return (
-    <div className={styles.red}>
+    <div className="red">
       <Link to="/">home</Link>
       <br />
       <Link to="/login">login</Link>
@@ -79,11 +80,9 @@ function Home(props) {
       {data.newList && <div>{data.newList}</div>}
       {/* <button onClick={(this.changeName)}>click</button> */}
     </div>
-  );
+  )
 }
 
-Home.loadData = store => {
-  return store.dispatch(getValue());
-};
+Home.loadData = (store) => store.dispatch(getValue())
 
-export default Home;
+export default Home
